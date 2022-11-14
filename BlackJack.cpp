@@ -173,6 +173,6 @@ bool GenericPlayer::IsBusted() const {
 
 // announce name of player busted
 void GenericPlayer::Bust() const {
-    std::cout << "Player " << m_Name << " busts. " << std::endl;
+    std::cout << m_Name << " busts. " << std::endl;
 }
 
