@@ -176,3 +176,48 @@ void GenericPlayer::Bust() const {
     std::cout << m_Name << " busts. " << std::endl;
 }
 
+// PLAYER CLASS
+
+class Player : public GenericPlayer {
+    public:
+        Player(const std::string& name = "");
+        virtual ~Player();
+
+        //returns whether or not the player wants another hit
+        virtual bool IsHitting() const;
+        
+        //announces that the player wins
+        void Win() const;
+        //announces that the player loses
+        void Lose() const;
+        //announces that the player pushes
+        void Push() const;
+};
+
+//constructor outside the class
+Player::Player(const std::string& name):
+    GenericPlayer(name)
+{}
+
+//destructor outside of the class
+Player::~Player() {}
+
+// only instance of function outside of GenericPlayer and Player constructor
+bool Player::IsHitting() const {
+    char response;
+    std::cout << m_Name << ", do you want a hit? (Y/N):";
+    std::cin >> response;
+    return (response == 'Y' || response == 'y');
+}
+
+void Player::Win() const {
+    std::cout << m_Name << " wins.\n" << std::endl;
+}
+
+void Player::Lose() const {
+    std::cout << m_Name << " loses.\n" << std::endl;
+}
+
+void Player::Push() const {
+    std::cout << m_Name << " pushes.\n" << std::endl;
+}
