@@ -259,3 +259,67 @@ void House::FlipFirstCard() {
         std::cout << "No card to flip.";
     }
 }
+
+// DECK CLASS
+
+class Deck: public Hand {
+    public:
+
+        Deck();
+
+        virtual ~Deck();
+
+        //create a standard deck of 52 cards
+        void Populate();
+
+        // shuffle cards
+        void Shuffle();
+
+        // deal one card to a hand
+        void Deal(Hand& Hand);
+
+        // give additional cards to a generic player
+        void AdditionalCards(GenericPlayer& aGenericPlayer);
+};
+
+Deck::Deck() {
+    m_Cards.reserve(52);
+    Populate();
+}
+
+Deck::~Deck() {}
+
+void Deck::Populate() {
+    Clear();
+    // create a standard card deck 
+    for (int s=Card::ACE; s<=Card::KING; ++s){
+        for (int r=Card::CLUBS; r<=Card::DIAMONDS; ++r){
+            Add(new Card(static_cast<Card::rank>(r),static_cast<Card::suit>(s)));
+        }
+    }
+}
+
+void Deck::Shuffle() {
+    std::random_shuffle(m_Cards.begin(), m_Cards.end());
+}
+
+void Deck::Deal(Hand& aHand){
+    if (!m_Cards.empty()) {
+        aHand.Add(m_Cards.back());
+        m_Cards.pop_back();
+    } else {
+        std::cout << "Out of cards. Unable to deal." << std::endl;
+    }
+}
+
+void Deck::AdditionalCards(GenericPlayer& aGenericPlayer){
+    //continue to deal a card as long as generic player isn’t busted and wants another hit
+    while (aGenericPlayer.IsHitting() && !(aGenericPlayer.IsBusted())) {
+        Deal(aGenericPlayer);
+        std::cout << aGenericPlayer << std::endl;
+        if (aGenericPlayer.IsBusted()){
+            aGenericPlayer.Bust();
+        }
+    }
+}
+
