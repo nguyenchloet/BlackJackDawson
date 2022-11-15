@@ -221,3 +221,41 @@ void Player::Lose() const {
 void Player::Push() const {
     std::cout << m_Name << " pushes.\n" << std::endl;
 }
+
+// HOUSE CLASS
+
+class House : public GenericPlayer {
+    public:
+        House(const std::string& name = "House");
+
+        virtual ~House();
+
+        //indicates whether house is hitting - will always hit on 16 or less
+        virtual bool IsHitting() const;
+
+        // flips over first card 
+        void FlipFirstCard();
+};
+
+// constructor outside the class
+House::House(const std::string& name):
+    GenericPlayer(name)
+{}
+
+House::~House()
+{}
+
+// if GetTotal <=, return bool True, else False
+bool House::IsHitting() const {
+    return (GetTotal() <= 16);
+}
+
+// House deals with flipping the first card which initially is FaceDown, as shown in BlackJack.cpp file
+void House::FlipFirstCard() {
+    // using .empty() function for vectors / heap
+    if (!m_Cards.empty()) {
+        m_Cards[0]->Flip();
+    } else {
+        std::cout << "No card to flip.";
+    }
+}
