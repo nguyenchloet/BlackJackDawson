@@ -1,4 +1,4 @@
-//Blackjack
+//Blackjack -  Beginning CPP Through Game Programming by Michael Dawson Chapter 10 - Inheritance and Polymorphism: Blackjack
 //Plays a simple version of the casino game of blackjack; for 1 - 7 players
 
 #include <iostream>
