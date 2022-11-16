@@ -1,2 +1,2 @@
-# BlackJackDawson
+# BlackJack.cpp 
 Verbatim Code from Beginning CPP Through Game Programming by Michael Dawson Chapter 10 - Inheritance and Polymorphism: Blackjack
